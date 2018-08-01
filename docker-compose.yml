@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  data-producer:
+    image: data-producer-img:latest
+    ports:
+      - "8080:8080"
+    restart: on-failure
+    links:
+      - rabbitmq
+      
+  rabbitmq:
+    image: rabbitmq:management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:15672"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+networks:
+  data-pipeline-network:
+    driver: bridge
