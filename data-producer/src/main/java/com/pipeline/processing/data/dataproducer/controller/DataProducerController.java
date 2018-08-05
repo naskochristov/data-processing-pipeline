@@ -32,7 +32,7 @@ public class DataProducerController {
         userData.setDateOfBirth(requestData.getDateOfBirth());
         userData.setShortResume(requestData.getShortResume());
 
-        //TODO publish message to rabbitMq
+        //publish message to rabbitMq
         messageBinder.userDataOutput().send(MessageBuilder.withPayload(userData).build());
 
         //TODO publish message to websockets
