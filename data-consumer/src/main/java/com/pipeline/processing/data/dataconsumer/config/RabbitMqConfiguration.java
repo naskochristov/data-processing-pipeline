@@ -1,10 +1,7 @@
 package com.pipeline.processing.data.dataconsumer.config;
 
 import com.pipeline.processing.data.dataconsumer.message.MessageInputBinder;
-import org.springframework.amqp.core.AmqpAdmin;
-import org.springframework.amqp.core.Binding;
-import org.springframework.amqp.core.Queue;
-import org.springframework.amqp.core.TopicExchange;
+import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
@@ -17,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
 @EnableBinding(MessageInputBinder.class)
 public class RabbitMqConfiguration {
 
-    @Value("${amqp.host}")
+/*    @Value("${amqp.host}")
     private String host;
 
     @Value("${amqp.port}")
@@ -62,9 +59,9 @@ public class RabbitMqConfiguration {
     {
         AmqpAdmin amqpAdmin = new RabbitAdmin(connectionFactory());
         amqpAdmin.declareQueue(userDataQueue());
-        Binding userDataQueueBinding = new Binding(queue, Binding.DestinationType.QUEUE, exchange,"#",null);
+
         amqpAdmin.declareBinding(userDataQueueBinding);
         return true;
-    }
+    }*/
 
 }

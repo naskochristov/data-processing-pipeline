@@ -2,6 +2,7 @@ version: '3'
 
 services:
   data-producer:
+    build: ./data-producer
     image: data-producer-img:latest
     ports:
       - "8080:8080"
@@ -9,7 +10,20 @@ services:
     links:
       - rabbitmq
     networks:
-      - data-pipeline-network      
+      - data-pipeline-network
+      
+  data-consumer:
+    build: ./data-consumer
+    image: data-consumer-img:latest
+    ports:
+      - "8082:8082"
+    restart: on-failure
+    links:
+      - rabbitmq
+      - mongodb
+    networks:
+      - data-pipeline-network  
+      
   rabbitmq:
     image: rabbitmq:management
     ports:

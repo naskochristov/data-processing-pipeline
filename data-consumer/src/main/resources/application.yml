@@ -12,8 +12,14 @@ spring:
     stream:
       bindings:
         user-data-input:
-          destination: queue.userdata
+          destination: topic.user.data
           binder: local_rabbit
+      rabbit:
+        bindings:
+          input:
+            consumer:
+              exchangeType: topic
+
       binders:
         local_rabbit:
           type: rabbit
@@ -35,9 +41,6 @@ spring:
         enabled: true
       username: mongouser
       password: mongopass
-
-
-
 
 server:
   port: 8082
