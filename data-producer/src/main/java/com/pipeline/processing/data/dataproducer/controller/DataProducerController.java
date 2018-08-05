@@ -2,8 +2,9 @@ package com.pipeline.processing.data.dataproducer.controller;
 
 import com.pipeline.processing.data.dataproducer.domain.UserData;
 import com.pipeline.processing.data.dataproducer.dto.DataProducerRequest;
-import com.pipeline.processing.data.dataproducer.message.MessageBinder;
+import com.pipeline.processing.data.dataproducer.message.MessageOutputBinder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.MessageHeaders;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +18,7 @@ import java.util.Random;
 public class DataProducerController {
 
     @Autowired
-    public MessageBinder messageBinder;
+    public MessageOutputBinder messageBinder;
 
     @RequestMapping(method = RequestMethod.POST, value="/userdata", produces = "application/json")
     public int produceUserData(@RequestBody DataProducerRequest requestData)

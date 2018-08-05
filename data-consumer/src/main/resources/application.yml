@@ -1,0 +1,43 @@
+amqp:
+  host: localhost
+  port: 5672
+  user: guest
+  pwd:  guest
+  vhost: /
+  exchange: topic.user.data
+  queue: queue.userdata
+
+spring:
+  cloud:
+    stream:
+      bindings:
+        user-data-input:
+          destination: queue.userdata
+          binder: local_rabbit
+      binders:
+        local_rabbit:
+          type: rabbit
+          environment:
+            spring:
+              rabbitmq:
+                host: localhost
+                port: 5672
+                username: guest
+                password: guest
+                virtual-host: /
+  data:
+    mongodb:
+      authentication-database: admin
+      database: userdata
+      host: localhost
+      port: 27017
+      repositories:
+        enabled: true
+      username: mongouser
+      password: mongopass
+
+
+
+
+server:
+  port: 8082

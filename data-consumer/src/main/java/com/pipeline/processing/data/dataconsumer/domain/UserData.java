@@ -1,9 +1,14 @@
-package com.pipeline.processing.data.dataproducer.domain;
+package com.pipeline.processing.data.dataconsumer.domain;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
 
+@Document(collection = "userdata")
 public class UserData {
 
+    @Id
     private int userId;
     private String firstName;
     private String lastName;

@@ -8,7 +8,8 @@ services:
     restart: on-failure
     links:
       - rabbitmq
-      
+    networks:
+      - data-pipeline-network      
   rabbitmq:
     image: rabbitmq:management
     ports:
@@ -19,7 +20,23 @@ services:
       interval: 30s
       timeout: 10s
       retries: 5
-
+    networks:
+      - data-pipeline-network
+  mongodb:
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: mongouser
+      MONGO_INITDB_ROOT_PASSWORD: mongopass
+    volumes:
+      - mongodb:/data/userdatadb
+      - mongodb_config:/data/configuserdatadb
+    ports:
+        - 27017:27017
+    networks:
+      - data-pipeline-network
 networks:
   data-pipeline-network:
     driver: bridge
+volumes:
+  mongodb:
+  mongodb_config:
